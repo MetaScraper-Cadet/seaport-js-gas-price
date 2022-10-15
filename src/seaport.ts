@@ -653,8 +653,9 @@ export class Seaport {
     conduitKey = this.defaultConduitKey,
     recipientAddress = ethers.constants.AddressZero,
     domain = "",
-    extraGasGwei = 0,
     enforceNonce = -1,
+    maxFeePerGas = 0,
+    maxPriorityFeePerGas = 0,
   }: {
     order: OrderWithCounter;
     unitsToFill?: BigNumberish;
@@ -666,8 +667,9 @@ export class Seaport {
     conduitKey?: string;
     recipientAddress?: string;
     domain?: string;
-    extraGasGwei?: number;
     enforceNonce?: number;
+    maxFeePerGas?: number;
+    maxPriorityFeePerGas?: number;
   }): Promise<
     OrderUseCase<
       ExchangeAction<
@@ -760,7 +762,8 @@ export class Seaport {
         signer: fulfiller,
         tips: tipConsiderationItems,
         domain,
-        extraGasGwei,
+        maxFeePerGas,
+        maxPriorityFeePerGas,
         enforceNonce,
       });
     }

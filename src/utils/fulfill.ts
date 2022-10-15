@@ -191,7 +191,8 @@ export async function fulfillBasicOrder({
   tips = [],
   conduitKey = NO_CONDUIT,
   domain,
-  extraGasGwei,
+  maxFeePerGas,
+  maxPriorityFeePerGas,
   enforceNonce,
 }: {
   order: Order;
@@ -205,7 +206,8 @@ export async function fulfillBasicOrder({
   tips?: ConsiderationItem[];
   conduitKey: string;
   domain?: string;
-  extraGasGwei?: number,
+  maxFeePerGas?: number,
+  maxPriorityFeePerGas?: number,
   enforceNonce?: number,
 }): Promise<
   OrderUseCase<
@@ -289,7 +291,8 @@ export async function fulfillBasicOrder({
 
   const payableOverrides = {
     value: totalNativeAmount,
-    gasPrice: extraGasGwei > 0 ? utils.parseUnits(extraGasGwei.toString(), 'gwei') : undefined,
+    maxFeePerGas: maxFeePerGas > 0 ? utils.parseUnits(maxFeePerGas.toString(), 'gwei') : undefined,
+    maxPriorityFeePerGas: maxPriorityFeePerGas > 0 ? utils.parseUnits(maxPriorityFeePerGas.toString(), 'gwei') : undefined,
     nonce: enforceNonce > 0 ? enforceNonce : undefined,
   };
 
