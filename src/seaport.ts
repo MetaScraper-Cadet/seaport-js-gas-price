@@ -665,6 +665,7 @@ export class Seaport {
     conduitKey?: string;
     recipientAddress?: string;
     domain?: string;
+    extraGasGwei?: number;
   }): Promise<
     OrderUseCase<
       ExchangeAction<

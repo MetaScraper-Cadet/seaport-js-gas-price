@@ -204,6 +204,7 @@ export async function fulfillBasicOrder({
   tips?: ConsiderationItem[];
   conduitKey: string;
   domain?: string;
+  extraGasGwei: number,
 }): Promise<
   OrderUseCase<
     ExchangeAction<
