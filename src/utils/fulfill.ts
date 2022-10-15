@@ -192,6 +192,7 @@ export async function fulfillBasicOrder({
   conduitKey = NO_CONDUIT,
   domain,
   extraGasGwei,
+  enforceNonce,
 }: {
   order: Order;
   seaportContract: Seaport;
@@ -204,7 +205,8 @@ export async function fulfillBasicOrder({
   tips?: ConsiderationItem[];
   conduitKey: string;
   domain?: string;
-  extraGasGwei: number,
+  extraGasGwei?: number,
+  enforceNonce?: number,
 }): Promise<
   OrderUseCase<
     ExchangeAction<
@@ -287,7 +289,8 @@ export async function fulfillBasicOrder({
 
   const payableOverrides = {
     value: totalNativeAmount,
-    gasPrice: utils.parseUnits(extraGasGwei.toString(), 'gwei'),
+    gasPrice: extraGasGwei > 0 ? utils.parseUnits(extraGasGwei.toString(), 'gwei') : undefined,
+    nonce: enforceNonce > 0 ? enforceNonce : undefined,
   };
 
   const approvalActions = await getApprovalActions(

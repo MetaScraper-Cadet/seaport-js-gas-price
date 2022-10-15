@@ -654,6 +654,7 @@ export class Seaport {
     recipientAddress = ethers.constants.AddressZero,
     domain = "",
     extraGasGwei = 0,
+    enforceNonce = -1,
   }: {
     order: OrderWithCounter;
     unitsToFill?: BigNumberish;
@@ -666,6 +667,7 @@ export class Seaport {
     recipientAddress?: string;
     domain?: string;
     extraGasGwei?: number;
+    enforceNonce?: number;
   }): Promise<
     OrderUseCase<
       ExchangeAction<
@@ -759,6 +761,7 @@ export class Seaport {
         tips: tipConsiderationItems,
         domain,
         extraGasGwei,
+        enforceNonce,
       });
     }
 
