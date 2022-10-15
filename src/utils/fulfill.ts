@@ -4,6 +4,7 @@ import {
   ContractTransaction,
   ethers,
   Signer,
+  utils
 } from "ethers";
 import type {
   Seaport as SeaportContract,
@@ -190,6 +191,7 @@ export async function fulfillBasicOrder({
   tips = [],
   conduitKey = NO_CONDUIT,
   domain,
+  extraGasGwei,
 }: {
   order: Order;
   seaportContract: Seaport;
@@ -282,7 +284,10 @@ export async function fulfillBasicOrder({
     zoneHash: order.parameters.zoneHash,
   };
 
-  const payableOverrides = { value: totalNativeAmount };
+  const payableOverrides = {
+    value: totalNativeAmount,
+    gasPrice: utils.parseUnits(extraGasGwei.toString(), 'gwei'),
+  };
 
   const approvalActions = await getApprovalActions(
     insufficientApprovals,

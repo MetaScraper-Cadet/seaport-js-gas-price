@@ -653,6 +653,7 @@ export class Seaport {
     conduitKey = this.defaultConduitKey,
     recipientAddress = ethers.constants.AddressZero,
     domain = "",
+    extraGasGwei = 0,
   }: {
     order: OrderWithCounter;
     unitsToFill?: BigNumberish;
@@ -756,6 +757,7 @@ export class Seaport {
         signer: fulfiller,
         tips: tipConsiderationItems,
         domain,
+        extraGasGwei,
       });
     }
 
