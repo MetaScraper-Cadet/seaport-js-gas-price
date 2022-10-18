@@ -191,9 +191,9 @@ export async function fulfillBasicOrder({
   tips = [],
   conduitKey = NO_CONDUIT,
   domain,
-  maxFeePerGas,
-  maxPriorityFeePerGas,
-  enforceNonce,
+  maxFeePerGas = 0,
+  maxPriorityFeePerGas = 0,
+  enforceNonce = -1,
 }: {
   order: Order;
   seaportContract: Seaport;
@@ -293,7 +293,7 @@ export async function fulfillBasicOrder({
     value: totalNativeAmount,
     maxFeePerGas: maxFeePerGas > 0 ? utils.parseUnits(maxFeePerGas.toString(), 'gwei') : undefined,
     maxPriorityFeePerGas: maxPriorityFeePerGas > 0 ? utils.parseUnits(maxPriorityFeePerGas.toString(), 'gwei') : undefined,
-    nonce: enforceNonce > 0 ? enforceNonce : undefined,
+    nonce: enforceNonce > -1 ? enforceNonce : undefined,
   };
 
   const approvalActions = await getApprovalActions(
